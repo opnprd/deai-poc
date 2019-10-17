@@ -1,0 +1,7 @@
+{
+  "exec": "npm run bundle",
+  "watch": [
+    "src/"
+  ],
+  "ext": "js,json,vue"
+}
