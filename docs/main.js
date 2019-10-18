@@ -412,37 +412,12 @@
     });
   });
 
-  var centre = [53.741, -2.013];
-  var config = {
-    title: 'Sample EIA Report',
-    mapViews: {
-      overview: {
-        centre: centre,
-        zoom: 13
-      },
-      zoomed: {
-        centre: centre,
-        zoom: 15
-      }
-    },
-    sections: [{
-      title: 'Section 1',
-      content: [{
-        type: 'map',
-        view: 'overview'
-      }]
-    }, {
-      title: 'Section 2',
-      content: [{
-        type: 'map',
-        view: 'zoomed'
-      }]
-    }, {
-      title: 'Section 3'
-    }]
-  };
-  report$1(_objectSpread2({
-    element: '#app'
-  }, config));
+  fetch('./report.json').then(function (response) {
+    return response.json();
+  }).then(function (reportSpec) {
+    report$1(_objectSpread2({
+      element: '#app'
+    }, reportSpec));
+  });
 
 }());

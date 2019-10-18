@@ -1,0 +1,36 @@
+{
+  "title": "Sample EIA Report",
+  "mapViews": {
+    "overview": {
+      "centre": [ 53.741, -2.013 ],
+      "zoom": 13
+    },
+    "zoomed": {
+      "centre": [ 53.741, -2.013 ],
+      "zoom": 15
+    }
+  },
+  "sections": [
+    {
+      "title": "Section 1",
+      "content": [
+        {
+          "type": "map",
+          "view": "overview"
+        }
+      ]
+    },
+    {
+      "title": "Section 2",
+      "content": [
+        {
+          "type": "map",
+          "view": "zoomed"
+        }
+      ]
+    },
+    {
+      "title": "Section 3"
+    }
+  ]
+}
