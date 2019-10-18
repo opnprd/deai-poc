@@ -1,8 +1,105 @@
 (function () {
   'use strict';
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(source, true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(source).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function initMap() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        id = _ref.id,
+        centre = _ref.centre,
+        zoom = _ref.zoom;
+
+    var map = L.map(id).setView(centre, zoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+  }
+
+  var id = 0;
+  var nextId = function nextId() {
+    return "ref-".concat(id++);
+  };
+
+  var report = {
+    debug: true,
+    state: {
+      title: null,
+      sections: [],
+      mapViews: {}
+    },
+    setTitle: function setTitle(title) {
+      this.state.title = title;
+    },
+    setSections: function setSections(sections) {
+      this.state.sections = sections;
+    },
+    setMapViews: function setMapViews(mapViews) {
+      this.state.mapViews = mapViews;
+    }
+  };
+
   var script = {
-    props: ['title']
+    props: ['view'],
+    data: function data() {
+      return {
+        id: nextId()
+      };
+    },
+    mounted: function mounted() {
+      var mapView = report.state.mapViews[this.view];
+      initMap({
+        id: this.id,
+        centre: mapView.centre,
+        zoom: mapView.zoom
+      });
+    }
   };
 
   function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -98,7 +195,7 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("section", [_c("h1", [_vm._v(_vm._s(_vm.title))])])
+    return _c("div", { staticClass: "map", attrs: { id: _vm.id } })
   };
   var __vue_staticRenderFns__ = [];
   __vue_render__._withStripped = true;
@@ -117,7 +214,7 @@
     
 
     
-    var section = normalizeComponent_1(
+    var map = normalizeComponent_1(
       { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
       __vue_inject_styles__,
       __vue_script__,
@@ -129,7 +226,10 @@
     );
 
   var script$1 = {
-    props: ['title']
+    props: ['title', 'content'],
+    components: {
+      'report-map': map
+    }
   };
 
   /* script */
@@ -140,7 +240,26 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("header", [_c("h1", [_vm._v(_vm._s(_vm.title))])])
+    return _c(
+      "section",
+      [
+        _c("h1", [_vm._v(_vm._s(_vm.title))]),
+        _vm._v(" "),
+        _vm._l(_vm.content, function(block, index) {
+          return _c(
+            "div",
+            { key: index },
+            [
+              block.type === "map"
+                ? _c("report-map", { attrs: { view: block.view } })
+                : _vm._e()
+            ],
+            1
+          )
+        })
+      ],
+      2
+    )
   };
   var __vue_staticRenderFns__$1 = [];
   __vue_render__$1._withStripped = true;
@@ -159,7 +278,7 @@
     
 
     
-    var title = normalizeComponent_1(
+    var section = normalizeComponent_1(
       { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
       __vue_inject_styles__$1,
       __vue_script__$1,
@@ -171,11 +290,7 @@
     );
 
   var script$2 = {
-    props: ['config'],
-    components: {
-      'report-title': title,
-      'report-section': section
-    }
+    props: ['title']
   };
 
   /* script */
@@ -186,20 +301,7 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c(
-      "article",
-      [
-        _c("report-title", { attrs: { title: _vm.config.title } }),
-        _vm._v(" "),
-        _vm._l(_vm.config.sections, function(section, index) {
-          return _c("report-section", {
-            key: index,
-            attrs: { title: section.title }
-          })
-        })
-      ],
-      2
-    )
+    return _c("header", [_c("h1", [_vm._v(_vm._s(_vm.title))])])
   };
   var __vue_staticRenderFns__$2 = [];
   __vue_render__$2._withStripped = true;
@@ -218,7 +320,7 @@
     
 
     
-    var eiaReport = normalizeComponent_1(
+    var title = normalizeComponent_1(
       { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
       __vue_inject_styles__$2,
       __vue_script__$2,
@@ -229,34 +331,118 @@
       undefined
     );
 
-  var report = (function (_ref) {
+  console.log(report.state);
+  var script$3 = {
+    data: function data() {
+      return {
+        report: report.state
+      };
+    },
+    components: {
+      'report-title': title,
+      'report-section': section
+    }
+  };
+
+  /* script */
+  const __vue_script__$3 = script$3;
+
+  /* template */
+  var __vue_render__$3 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "article",
+      [
+        _c("report-title", { attrs: { title: _vm.report.title } }),
+        _vm._v(" "),
+        _vm._l(_vm.report.sections, function(section, index) {
+          return _c("report-section", {
+            key: index,
+            attrs: { title: section.title, content: section.content }
+          })
+        })
+      ],
+      2
+    )
+  };
+  var __vue_staticRenderFns__$3 = [];
+  __vue_render__$3._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$3 = undefined;
+    /* scoped */
+    const __vue_scope_id__$3 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$3 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$3 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+
+    
+    var eiaReport = normalizeComponent_1(
+      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+      __vue_inject_styles__$3,
+      __vue_script__$3,
+      __vue_scope_id__$3,
+      __vue_is_functional_template__$3,
+      __vue_module_identifier__$3,
+      undefined,
+      undefined
+    );
+
+  var report$1 = (function (_ref) {
     var element = _ref.element,
-        config = _ref.config;
+        title = _ref.title,
+        mapViews = _ref.mapViews,
+        sections = _ref.sections;
+    report.setTitle(title);
+    report.setSections(sections);
+    report.setMapViews(mapViews);
     new Vue({
       el: element,
       components: {
         'eia-report': eiaReport
       },
-      data: {
-        config: config
-      },
-      template: '<eia-report v-bind:config="config"></eia-report>'
+      template: '<eia-report />'
     });
   });
 
+  var centre = [53.741, -2.013];
   var config = {
     title: 'Sample EIA Report',
+    mapViews: {
+      overview: {
+        centre: centre,
+        zoom: 13
+      },
+      zoomed: {
+        centre: centre,
+        zoom: 15
+      }
+    },
     sections: [{
-      title: 'Section 1'
+      title: 'Section 1',
+      content: [{
+        type: 'map',
+        view: 'overview'
+      }]
     }, {
-      title: 'Section 2'
+      title: 'Section 2',
+      content: [{
+        type: 'map',
+        view: 'zoomed'
+      }]
     }, {
       title: 'Section 3'
     }]
   };
-  report({
-    element: '#app',
-    config: config
-  });
+  report$1(_objectSpread2({
+    element: '#app'
+  }, config));
 
 }());

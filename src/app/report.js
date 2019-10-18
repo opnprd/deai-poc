@@ -1,16 +1,21 @@
 import eiaReport from '../components/eia-report.vue';
+import report from '../lib/report-definition.js';
 
 export default ({
   element,
-  config,
+  title,
+  mapViews,
+  sections,
 }) => {
-  new Vue({el: element,
+  report.setTitle(title);
+  report.setSections(sections);
+  report.setMapViews(mapViews);
+
+  new Vue({
+    el: element,
     components: {
       'eia-report': eiaReport,
     },
-    data: {
-      config,
-    },
-    template: '<eia-report v-bind:config="config"></eia-report>',
+    template: '<eia-report />',
   });
 };
