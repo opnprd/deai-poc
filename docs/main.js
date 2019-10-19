@@ -75,12 +75,16 @@
         id: nextId()
       };
     },
+    computed: {
+      mapView: function mapView() {
+        return this.mapViews[this.view];
+      }
+    },
     mounted: function mounted() {
-      var mapView = this.mapViews[this.view];
       initMap({
         id: this.id,
-        centre: mapView.centre,
-        zoom: mapView.zoom
+        centre: this.mapView.centre,
+        zoom: this.mapView.zoom
       });
     }
   };
