@@ -1,4 +1,4 @@
-(function () {
+var Reporter = (function (exports) {
   'use strict';
 
   function initMap() {
@@ -288,14 +288,13 @@
           'report-header': reportTitle,
           'report-section': reportSection
         },
-        template: "<article>\n      <report-header :title=\"title\" />\n      <report-section\n        v-for=\"(section, index) in sections\"\n        :key=\"index\"\n        :title=\"section.title\"\n        :content=\"section.content\"\n      />\n    </article>"
+        template: "<article>\n      <report-header :title=\"title\" />\n      <report-section\n        v-for=\"(section, index) in sections\"\n        v-bind=\"section\"\n        :key=\"index\"\n      />\n    </article>"
       });
     });
   });
 
-  report({
-    element: '#app',
-    reportSpec: './report.json'
-  });
+  exports.report = report;
 
-}());
+  return exports;
+
+}({}));

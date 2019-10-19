@@ -25,9 +25,8 @@ export default ({
       <report-header :title="title" />
       <report-section
         v-for="(section, index) in sections"
+        v-bind="section"
         :key="index"
-        :title="section.title"
-        :content="section.content"
       />
     </article>`,
     });

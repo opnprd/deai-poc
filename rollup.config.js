@@ -5,13 +5,14 @@ import { terser } from 'rollup-plugin-terser';
 import vue from 'rollup-plugin-vue';
 
 const entrypoint = 'main';
+const library = 'reporter';
 const outputDir = 'dist';
 
 export default {
   input: `src/${entrypoint}.js`,
   output: [
-    { file: `${outputDir}/${entrypoint}.js`, format: 'iife' },
-    { file: `${outputDir}/${entrypoint}.min.js`, format: 'iife' },
+    { name: 'Reporter', file: `${outputDir}/${library}.js`, format: 'iife' },
+    { name: 'Reporter', file: `${outputDir}/${library}.min.js`, format: 'iife' },
   ],
   plugins: [
     resolve(),
