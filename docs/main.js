@@ -60,6 +60,7 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    return map;
   }
 
   var id = 0;
@@ -72,7 +73,8 @@
     inject: ['mapViews'],
     data: function data() {
       return {
-        id: nextId()
+        id: nextId(),
+        map: null
       };
     },
     computed: {
@@ -81,7 +83,7 @@
       }
     },
     mounted: function mounted() {
-      initMap({
+      this.map = initMap({
         id: this.id,
         centre: this.mapView.centre,
         zoom: this.mapView.zoom

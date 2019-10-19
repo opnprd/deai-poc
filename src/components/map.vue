@@ -7,6 +7,7 @@ export default {
   inject: ['mapViews'],
   data: () => ({
     id: nextId(),
+    map: null,
   }),
   computed: {
     mapView() {
@@ -14,7 +15,7 @@ export default {
     },
   },
   mounted: function () {
-    initMap({
+    this.map = initMap({
       id: this.id,
       centre: this.mapView.centre,
       zoom: this.mapView.zoom
