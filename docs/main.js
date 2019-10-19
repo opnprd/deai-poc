@@ -1,55 +1,6 @@
 (function () {
   'use strict';
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(source, true).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(source).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
-  }
-
   function initMap() {
     var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         id = _ref.id,
@@ -70,17 +21,12 @@
 
   var script = {
     props: ['view'],
-    inject: ['mapViews'],
     data: function data() {
       return {
         id: nextId(),
-        map: null
+        map: null,
+        mapView: this.$root.mapViews[this.view]
       };
-    },
-    computed: {
-      mapView: function mapView() {
-        return this.mapViews[this.view];
-      }
     },
     mounted: function mounted() {
       this.map = initMap({
@@ -267,7 +213,7 @@
     
 
     
-    var section = normalizeComponent_1(
+    var reportSection = normalizeComponent_1(
       { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
       __vue_inject_styles__$1,
       __vue_script__$1,
@@ -309,7 +255,7 @@
     
 
     
-    var title = normalizeComponent_1(
+    var reportTitle = normalizeComponent_1(
       { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
       __vue_inject_styles__$2,
       __vue_script__$2,
@@ -320,92 +266,36 @@
       undefined
     );
 
-  var script$3 = {
-    inject: ['title', 'sections'],
-    components: {
-      'report-title': title,
-      'report-section': section
-    }
-  };
-
-  /* script */
-  const __vue_script__$3 = script$3;
-
-  /* template */
-  var __vue_render__$3 = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c(
-      "article",
-      [
-        _c("report-title", { attrs: { title: _vm.title } }),
-        _vm._v(" "),
-        _vm._l(_vm.sections, function(section, index) {
-          return _c("report-section", {
-            key: index,
-            attrs: { title: section.title, content: section.content }
-          })
-        })
-      ],
-      2
-    )
-  };
-  var __vue_staticRenderFns__$3 = [];
-  __vue_render__$3._withStripped = true;
-
-    /* style */
-    const __vue_inject_styles__$3 = undefined;
-    /* scoped */
-    const __vue_scope_id__$3 = undefined;
-    /* module identifier */
-    const __vue_module_identifier__$3 = undefined;
-    /* functional template */
-    const __vue_is_functional_template__$3 = false;
-    /* style inject */
-    
-    /* style inject SSR */
-    
-
-    
-    var eiaReport = normalizeComponent_1(
-      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-      __vue_inject_styles__$3,
-      __vue_script__$3,
-      __vue_scope_id__$3,
-      __vue_is_functional_template__$3,
-      __vue_module_identifier__$3,
-      undefined,
-      undefined
-    );
-
   var report = (function (_ref) {
     var element = _ref.element,
-        title = _ref.title,
-        mapViews = _ref.mapViews,
-        sections = _ref.sections;
-    new Vue({
-      el: element,
-      provide: function provide() {
-        return {
-          title: title,
-          sections: sections,
-          mapViews: mapViews
-        };
-      },
-      components: {
-        'eia-report': eiaReport
-      },
-      template: '<eia-report />'
+        reportSpec = _ref.reportSpec;
+    fetch(reportSpec).then(function (response) {
+      return response.json();
+    }).then(function (_ref2) {
+      var title = _ref2.title,
+          sections = _ref2.sections,
+          mapViews = _ref2.mapViews;
+      new Vue({
+        el: element,
+        data: function data() {
+          return {
+            title: title,
+            sections: sections,
+            mapViews: mapViews
+          };
+        },
+        components: {
+          'report-header': reportTitle,
+          'report-section': reportSection
+        },
+        template: "<article>\n      <report-header :title=\"title\" />\n      <report-section\n        v-for=\"(section, index) in sections\"\n        :key=\"index\"\n        :title=\"section.title\"\n        :content=\"section.content\"\n      />\n    </article>"
+      });
     });
   });
 
-  fetch('./report.json').then(function (response) {
-    return response.json();
-  }).then(function (reportSpec) {
-    report(_objectSpread2({
-      element: '#app'
-    }, reportSpec));
+  report({
+    element: '#app',
+    reportSpec: './report.json'
   });
 
 }());

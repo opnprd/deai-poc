@@ -4,15 +4,12 @@ import nextId from '../lib/utils.js';
 
 export default {
   props: ['view'],
-  inject: ['mapViews'],
-  data: () => ({
-    id: nextId(),
-    map: null,
-  }),
-  computed: {
-    mapView() {
-      return this.mapViews[this.view];
-    },
+  data() {
+    return {
+      id: nextId(),
+      map: null,
+      mapView: this.$root.mapViews[this.view]
+    };
   },
   mounted: function () {
     this.map = initMap({
