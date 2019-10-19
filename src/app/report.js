@@ -1,5 +1,4 @@
 import eiaReport from '../components/eia-report.vue';
-import report from '../lib/report-definition.js';
 
 export default ({
   element,
@@ -7,12 +6,15 @@ export default ({
   mapViews,
   sections,
 }) => {
-  report.setTitle(title);
-  report.setSections(sections);
-  report.setMapViews(mapViews);
-
   new Vue({
     el: element,
+    provide () {
+      return {
+        title,
+        sections,
+        mapViews,
+      };
+    },
     components: {
       'eia-report': eiaReport,
     },

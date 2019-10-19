@@ -1,13 +1,9 @@
 <script>
   import section from './section.vue';
   import title from './title.vue';
-  import report from '../lib/report-definition.js';
-  console.log(report.state);
 
   export default {
-    data: () => ({
-      report: report.state,
-    }),
+    inject: ['title', 'sections'],
     components: {
       'report-title': title,
       'report-section': section,
@@ -16,9 +12,9 @@
 </script>
 <template>
   <article>
-    <report-title v-bind:title="report.title" />
+    <report-title v-bind:title="title" />
     <report-section
-      v-for="(section, index) in report.sections"
+      v-for="(section, index) in sections"
       :key="index"
       :title="section.title"
       :content="section.content"

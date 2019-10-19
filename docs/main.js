@@ -67,33 +67,16 @@
     return "ref-".concat(id++);
   };
 
-  var report = {
-    debug: true,
-    state: {
-      title: null,
-      sections: [],
-      mapViews: {}
-    },
-    setTitle: function setTitle(title) {
-      this.state.title = title;
-    },
-    setSections: function setSections(sections) {
-      this.state.sections = sections;
-    },
-    setMapViews: function setMapViews(mapViews) {
-      this.state.mapViews = mapViews;
-    }
-  };
-
   var script = {
     props: ['view'],
+    inject: ['mapViews'],
     data: function data() {
       return {
         id: nextId()
       };
     },
     mounted: function mounted() {
-      var mapView = report.state.mapViews[this.view];
+      var mapView = this.mapViews[this.view];
       initMap({
         id: this.id,
         centre: mapView.centre,
@@ -331,13 +314,8 @@
       undefined
     );
 
-  console.log(report.state);
   var script$3 = {
-    data: function data() {
-      return {
-        report: report.state
-      };
-    },
+    inject: ['title', 'sections'],
     components: {
       'report-title': title,
       'report-section': section
@@ -355,9 +333,9 @@
     return _c(
       "article",
       [
-        _c("report-title", { attrs: { title: _vm.report.title } }),
+        _c("report-title", { attrs: { title: _vm.title } }),
         _vm._v(" "),
-        _vm._l(_vm.report.sections, function(section, index) {
+        _vm._l(_vm.sections, function(section, index) {
           return _c("report-section", {
             key: index,
             attrs: { title: section.title, content: section.content }
@@ -395,16 +373,20 @@
       undefined
     );
 
-  var report$1 = (function (_ref) {
+  var report = (function (_ref) {
     var element = _ref.element,
         title = _ref.title,
         mapViews = _ref.mapViews,
         sections = _ref.sections;
-    report.setTitle(title);
-    report.setSections(sections);
-    report.setMapViews(mapViews);
     new Vue({
       el: element,
+      provide: function provide() {
+        return {
+          title: title,
+          sections: sections,
+          mapViews: mapViews
+        };
+      },
       components: {
         'eia-report': eiaReport
       },
@@ -415,7 +397,7 @@
   fetch('./report.json').then(function (response) {
     return response.json();
   }).then(function (reportSpec) {
-    report$1(_objectSpread2({
+    report(_objectSpread2({
       element: '#app'
     }, reportSpec));
   });
