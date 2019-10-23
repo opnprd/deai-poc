@@ -1,5 +1,5 @@
-import reportSection from '../components/section.vue';
-import reportTitle from '../components/title.vue';
+import Vue from 'vue';
+import report from '../components/report.vue';
 
 export default ({
   element,
@@ -10,25 +10,15 @@ export default ({
   }).then(({ title, sections, mapViews }) => {
     new Vue({
       el: element,
+      components: { 'es-report': report },
       data() {
         return {
-          title,
-          sections,
           mapViews,
         };
       },
-      components: {
-        'report-header': reportTitle,
-        'report-section': reportSection,
+      render(h) {
+        return h('es-report', { props: { title, sections } });
       },
-      template: `<article>
-      <report-header :title="title" />
-      <report-section
-        v-for="(section, index) in sections"
-        v-bind="section"
-        :key="index"
-      />
-    </article>`,
     });
   });
 };

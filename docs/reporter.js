@@ -1,6 +1,7 @@
-var Reporter = (function (exports, L) {
+var Reporter = (function (exports, Vue, L) {
   'use strict';
 
+  Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
   L = L && L.hasOwnProperty('default') ? L['default'] : L;
 
   function initMap() {
@@ -268,7 +269,66 @@ var Reporter = (function (exports, L) {
       undefined
     );
 
-  var report = (function (_ref) {
+  var script$3 = {
+    props: ["title", "sections"],
+    components: {
+      "report-header": reportTitle,
+      "report-section": reportSection
+    }
+  };
+
+  /* script */
+  const __vue_script__$3 = script$3;
+
+  /* template */
+  var __vue_render__$3 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "article",
+      [
+        _c("report-header", { attrs: { title: _vm.title } }),
+        _vm._v(" "),
+        _vm._l(_vm.sections, function(section, index) {
+          return _c(
+            "report-section",
+            _vm._b({ key: index }, "report-section", section, false)
+          )
+        })
+      ],
+      2
+    )
+  };
+  var __vue_staticRenderFns__$3 = [];
+  __vue_render__$3._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$3 = undefined;
+    /* scoped */
+    const __vue_scope_id__$3 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$3 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$3 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+
+    
+    var report = normalizeComponent_1(
+      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+      __vue_inject_styles__$3,
+      __vue_script__$3,
+      __vue_scope_id__$3,
+      __vue_is_functional_template__$3,
+      __vue_module_identifier__$3,
+      undefined,
+      undefined
+    );
+
+  var report$1 = (function (_ref) {
     var element = _ref.element,
         reportSpec = _ref.reportSpec;
     fetch(reportSpec).then(function (response) {
@@ -279,24 +339,28 @@ var Reporter = (function (exports, L) {
           mapViews = _ref2.mapViews;
       new Vue({
         el: element,
+        components: {
+          'es-report': report
+        },
         data: function data() {
           return {
-            title: title,
-            sections: sections,
             mapViews: mapViews
           };
         },
-        components: {
-          'report-header': reportTitle,
-          'report-section': reportSection
-        },
-        template: "<article>\n      <report-header :title=\"title\" />\n      <report-section\n        v-for=\"(section, index) in sections\"\n        v-bind=\"section\"\n        :key=\"index\"\n      />\n    </article>"
+        render: function render(h) {
+          return h('es-report', {
+            props: {
+              title: title,
+              sections: sections
+            }
+          });
+        }
       });
     });
   });
 
-  exports.report = report;
+  exports.report = report$1;
 
   return exports;
 
-}({}, L));
+}({}, Vue, L));

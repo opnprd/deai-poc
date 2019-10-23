@@ -11,12 +11,12 @@
   crossorigin=""/>
   <link href="report.css" rel="stylesheet">
   <!-- development version, includes helpful console warnings -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="vendor/vue/vue.runtime.js"></script>
   <script src="vendor/leaflet/leaflet.js"></script>
   <script src="reporter.js"></script>
 </head>
 <body>
-  <div id="app"/>
+  <div id="app"></div>
   <script defer>
     Reporter.report({ element: '#app', reportSpec: './report.json' });
   </script>

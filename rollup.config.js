@@ -10,6 +10,7 @@ const outputDir = 'dist';
 
 const globals = {
   leaflet: 'L',
+  vue: 'Vue',
 };
 
 export default {
@@ -35,5 +36,6 @@ export default {
   ],
   external: [
     'leaflet',
+    'vue',
   ],
 };

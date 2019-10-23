@@ -9,6 +9,18 @@ function leaflet() {
     .pipe(dest('docs/vendor/leaflet'));
 }
 
+function bundleVue() {
+  return src([
+    'node_modules/vue/dist/vue.js',
+    'node_modules/vue/dist/vue.min.js',
+    'node_modules/vue/dist/vue.runtime.js',
+    'node_modules/vue/dist/vue.runtime.min.js',
+  ])
+  .pipe(dest('docs/vendor/vue'));
+}
+
+const bundleModules = parallel(leaflet, bundleVue);
+
 module.exports = exports = {
-  default: leaflet,
+  default: bundleModules,
 };

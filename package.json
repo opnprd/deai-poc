@@ -18,6 +18,7 @@
     "postbundle": "cp dist/*.js docs"
   },
   "dependencies": {
-    "leaflet": "^1.5.1"
+    "leaflet": "^1.5.1",
+    "vue": "^2.6.10"
   }
 }
