@@ -4,7 +4,7 @@ import map from './map.vue';
 export default {
   props: [ 'title', 'content' ],
   components: {
-    'report-map': map,
+    'data-map': map,
   }
 }
 </script>
@@ -12,7 +12,7 @@ export default {
   <section>
     <h1>{{ title }}</h1>
     <div v-for='(block, index) in content' :key='index'>
-      <report-map v-if='block.type === "map"' :view='block.view' />
+      <data-map v-if='block.type === "map"' :view='block.view' />
     </div>
   </section>
 </template>

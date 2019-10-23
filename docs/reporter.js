@@ -166,7 +166,7 @@ var Reporter = (function (exports, Vue, L) {
   var script$1 = {
     props: ['title', 'content'],
     components: {
-      'report-map': map
+      'data-map': map
     }
   };
 
@@ -189,7 +189,7 @@ var Reporter = (function (exports, Vue, L) {
             { key: index },
             [
               block.type === "map"
-                ? _c("report-map", { attrs: { view: block.view } })
+                ? _c("data-map", { attrs: { view: block.view } })
                 : _vm._e()
             ],
             1
