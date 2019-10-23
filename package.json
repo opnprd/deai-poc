@@ -2,6 +2,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
+    "core-js": "^3.3.3",
     "eslint": "^6.0.1",
     "gulp": "^4.0.2",
     "nodemon": "^1.19.4",
