@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Vue from 'vue';
 import report from '../components/report.vue';
 
@@ -5,9 +6,8 @@ export default ({
   element,
   reportSpec,
 }) => {
-  fetch(reportSpec).then(response => {
-    return response.json();
-  }).then(({ title, sections, mapViews }) => {
+  axios.get(reportSpec).then(response => {
+    const { title, sections, mapViews } = response.data;
     new Vue({
       el: element,
       components: { 'es-report': report },

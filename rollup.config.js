@@ -20,7 +20,9 @@ export default {
     { name: 'Reporter', file: `${outputDir}/${library}.min.js`, format: 'iife', globals },
   ],
   plugins: [
-    resolve(),
+    resolve({
+      browser: true,
+    }),
     commonjs(),
     vue(),
     babel({
