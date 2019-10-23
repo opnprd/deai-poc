@@ -8,11 +8,15 @@ const entrypoint = 'main';
 const library = 'reporter';
 const outputDir = 'dist';
 
+const globals = {
+  leaflet: 'L',
+};
+
 export default {
   input: `src/${entrypoint}.js`,
   output: [
-    { name: 'Reporter', file: `${outputDir}/${library}.js`, format: 'iife' },
-    { name: 'Reporter', file: `${outputDir}/${library}.min.js`, format: 'iife' },
+    { name: 'Reporter', file: `${outputDir}/${library}.js`, format: 'iife', globals },
+    { name: 'Reporter', file: `${outputDir}/${library}.min.js`, format: 'iife', globals },
   ],
   plugins: [
     resolve(),
@@ -28,5 +32,8 @@ export default {
     terser({
       include: [/^.+\.min\.js$/, '*esm*'], 
     }),
+  ],
+  external: [
+    'leaflet',
   ],
 };

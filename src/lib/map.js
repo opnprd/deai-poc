@@ -1,3 +1,5 @@
+import L from 'leaflet';
+
 export default function initMap({ id, centre, zoom } = {}) {
   const map = L.map(id).setView(centre, zoom);
 

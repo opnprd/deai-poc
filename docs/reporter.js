@@ -1,5 +1,7 @@
-var Reporter = (function (exports) {
+var Reporter = (function (exports, L) {
   'use strict';
+
+  L = L && L.hasOwnProperty('default') ? L['default'] : L;
 
   function initMap() {
     var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -297,4 +299,4 @@ var Reporter = (function (exports) {
 
   return exports;
 
-}({}));
+}({}, L));
