@@ -2,14 +2,20 @@
   "title": "Sample EIA Report",
   "mapViews": {
     "overview": {
-      "centre": [ 53.741, -2.013 ],
+      "centre": [ 53.742, -2.027 ],
       "zoom": 13
     },
     "zoomed": {
-      "centre": [ 53.741, -2.013 ],
-      "zoom": 15
+      "centre": [ 53.742, -2.027 ],
+      "zoom": 17
     }
   },
+  "sources": [
+    {
+      "id": "redline",
+      "source": "data/redline.geojson"
+    }
+  ],
   "sections": [
     {
       "title": "Section 1",
@@ -20,7 +26,8 @@
         },
         {
           "type": "map",
-          "view": "overview"
+          "view": "overview",
+          "layers": [ "redline" ]
         }
       ]
     },
@@ -29,7 +36,8 @@
       "content": [
         {
           "type": "map",
-          "view": "zoomed"
+          "view": "zoomed",
+          "layers": [ "redline" ]
         }
       ]
     },
