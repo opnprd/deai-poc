@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Vue from 'vue';
-import report from '../components/report.vue';
+import reportHeader from '../components/title.vue';
+import reportSection from '../components/section.vue';
 
 export default ({
   element,
@@ -8,16 +9,19 @@ export default ({
 }) => {
   axios.get(reportSpec).then(response => {
     const { title, sections, mapViews } = response.data;
+    console.log(sections);
     new Vue({
       el: element,
-      components: { 'es-report': report },
+      components: {
+        'report-header': reportHeader,
+        'report-section': reportSection,
+      },
       data() {
         return {
           mapViews,
+          sections,
+          title,
         };
-      },
-      render(h) {
-        return h('es-report', { props: { title, sections } });
       },
     });
   });

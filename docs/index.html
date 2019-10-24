@@ -12,16 +12,19 @@
   crossorigin=""/>
   <link href="report.css" rel="stylesheet">
   <!-- development version, includes helpful console warnings -->
-  <script src="vendor/vue/vue.runtime.js"></script>
+  <script src="vendor/vue/vue.js"></script>
   <script src="vendor/leaflet/leaflet.js"></script>
   <script src="reporter.js"></script>
 </head>
 <body>
   <section role="main" class="central">
-    <div id="app"></div>
+    <article id="report">
+      <report-header v-bind:title="title"></report-header>
+      <report-section v-for="(section, index) in sections" v-bind="section" :key="index"></report-section>
+    </article>
   </section>
   <script defer>
-    Reporter.report({ element: '#app', reportSpec: './report.json' });
+    Reporter.report({ element: '#report', reportSpec: './report.json' });
   </script>
 </body>
 </html>
