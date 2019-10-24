@@ -15,6 +15,10 @@
       "title": "Section 1",
       "content": [
         {
+          "type": "narrative",
+          "markdown": "This is the introductory section."
+        },
+        {
           "type": "map",
           "view": "overview"
         }
