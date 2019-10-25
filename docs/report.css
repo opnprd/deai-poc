@@ -7,6 +7,8 @@ body > header {
   text-align: center;
   background: darkred;
   padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
   color: white;
 }
 
@@ -18,6 +20,10 @@ body > header h1 {
   margin-left: auto;
   margin-right: auto;
   max-width: 50rem;
+}
+
+section[role="main"] {
+  padding: 1em;
 }
 
 .map {
