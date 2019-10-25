@@ -3113,6 +3113,19 @@ var Reporter = (function (exports, Vue, L) {
 	    undefined
 	  );
 
+	var nativeJoin = [].join;
+
+	var ES3_STRINGS = indexedObject != Object;
+	var SLOPPY_METHOD = sloppyArrayMethod('join', ',');
+
+	// `Array.prototype.join` method
+	// https://tc39.github.io/ecma262/#sec-array.prototype.join
+	_export({ target: 'Array', proto: true, forced: ES3_STRINGS || SLOPPY_METHOD }, {
+	  join: function join(separator) {
+	    return nativeJoin.call(toIndexedObject(this), separator === undefined ? ',' : separator);
+	  }
+	});
+
 	var marked = createCommonjsModule(function (module, exports) {
 	(function(root) {
 
@@ -4813,7 +4826,7 @@ var Reporter = (function (exports, Vue, L) {
 	  props: ['markdown'],
 	  computed: {
 	    html: function html() {
-	      return marked(this.markdown);
+	      return marked(this.markdown.join('\n'));
 	    }
 	  }
 	};
@@ -4879,7 +4892,7 @@ var Reporter = (function (exports, Vue, L) {
 	      _vm._v(" "),
 	      _vm._l(_vm.content, function(block, index) {
 	        return _c(
-	          "div",
+	          "section",
 	          { key: index },
 	          [
 	            block.type === "map"

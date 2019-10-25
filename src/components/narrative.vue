@@ -4,7 +4,7 @@ export default {
   props: [ 'markdown' ],
   computed: {
     html() {
-      return marked(this.markdown);
+      return marked(this.markdown.join('\n'));
     }
   }
 }

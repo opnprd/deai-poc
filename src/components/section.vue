@@ -13,9 +13,9 @@ export default {
 <template>
   <section>
     <h1>{{ title }}</h1>
-    <div v-for='(block, index) in content' :key='index'>
+    <section v-for='(block, index) in content' :key='index'>
       <data-map v-if='block.type === "map"' v-bind="block" />
       <report-narrative v-if='block.type === "narrative"' v-bind="block" />
-    </div>
+    </section>
   </section>
 </template>

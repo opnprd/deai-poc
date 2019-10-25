@@ -1,5 +1,5 @@
 {
-  "title": "Sample EIA Report",
+  "title": "Digital EIA Data-Driven Environmental Statement",
   "mapViews": {
     "overview": {
       "centre": [ 53.742, -2.027 ],
@@ -18,31 +18,75 @@
   ],
   "sections": [
     {
-      "title": "Section 1",
+      "title": "Introduction",
       "content": [
         {
           "type": "narrative",
-          "markdown": "This is the introductory section."
+          "markdown": [
+            "This report provides an example of a purely data-driven Environmental Statment (ES)",
+            "that might be created as part of a Digital Environmental Impact Assessment.",
+            "It is conceived as an experiment in collating and displaying disparate sources",
+            "of open data to create an initial draft of an ES which can then be developed further.",
+            "",
+            "_NB_ This is purely an example report. Please do not draw any conclusions from the content",
+            "of this web page.",            
+            "",
+            "The report is [defined in an JSON file](report.json). This comprises a combination of",
+            "structure, content and data.",
+            "",
+            "Structure is provided by an array of `sections`, defining the flow of the report.",
+            "Each section comprises a title and a content array. The content array defines blocks",
+            "of different types. The block types are:",
+            "",
+            "* Narrative - markdown formatted text defining the structure of the element (like this block)",
+            "* Map - interactve maps initially focussed on a given viewpoint and displaying predefined",
+            "[GeoJSON](https://geojson.org) data layers.",
+            "",
+            "The data elements currently supported by the format are:",
+            "* mapViews - centre and zoom to be used as an initial view for a displayed map",
+            "* sources - named references to data for inclusion on map views. The data is referenced by",
+            "name in the definition of a map."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Site overview",
+      "content": [
+        {
+          "type": "narrative",
+          "markdown": [
+            "This section provides an overview of the site, which is a disused industrial site in Hebden",
+            "Bridge, West Yorkshire."
+          ]
+        },
+        {
+          "type": "narrative",
+          "markdown": [
+            "The site lies just to the west of the Hebden Bridge in the settlement of Mytholm. It is",
+            "directly adjacent to the A646."
+          ]
         },
         {
           "type": "map",
           "view": "overview",
           "layers": [ "redline" ]
-        }
-      ]
-    },
-    {
-      "title": "Section 2",
-      "content": [
+        },
+        {
+          "type": "narrative",
+          "markdown": [
+            "It is the former location of",
+            "[Mytholm Mill (a.k.a. Browns)](http://www.hebdenbridgehistory.org.uk/charlestown/mytholm.html#browns),",
+            "a former cotton mill and (latterly) engineering works. The site fell from use during the mid-1980s,",
+            "and was demolished in 2005."
+          ]
+        },
         {
           "type": "map",
           "view": "zoomed",
           "layers": [ "redline" ]
         }
       ]
-    },
-    {
-      "title": "Section 3"
     }
   ]
 }
