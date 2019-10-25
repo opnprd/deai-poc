@@ -2153,6 +2153,38 @@ var Reporter = (function (exports, Vue, L) {
 
 	var axios$1 = axios_1;
 
+	function get(_x) {
+	  return _get.apply(this, arguments);
+	}
+
+	function _get() {
+	  _get = _asyncToGenerator(
+	  /*#__PURE__*/
+	  regeneratorRuntime.mark(function _callee(url) {
+	    var _ref, data;
+
+	    return regeneratorRuntime.wrap(function _callee$(_context) {
+	      while (1) {
+	        switch (_context.prev = _context.next) {
+	          case 0:
+	            _context.next = 2;
+	            return axios$1.get(url);
+
+	          case 2:
+	            _ref = _context.sent;
+	            data = _ref.data;
+	            return _context.abrupt("return", data);
+
+	          case 5:
+	          case "end":
+	            return _context.stop();
+	        }
+	      }
+	    }, _callee);
+	  }));
+	  return _get.apply(this, arguments);
+	}
+
 	var script = {
 	  props: ['title']
 	};
@@ -2500,16 +2532,16 @@ var Reporter = (function (exports, Vue, L) {
 	var hiddenKeys = {};
 
 	var WeakMap$1 = global_1.WeakMap;
-	var set, get, has$1;
+	var set, get$1, has$1;
 
 	var enforce = function (it) {
-	  return has$1(it) ? get(it) : set(it, {});
+	  return has$1(it) ? get$1(it) : set(it, {});
 	};
 
 	var getterFor = function (TYPE) {
 	  return function (it) {
 	    var state;
-	    if (!isObject$1(it) || (state = get(it)).type !== TYPE) {
+	    if (!isObject$1(it) || (state = get$1(it)).type !== TYPE) {
 	      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
 	    } return state;
 	  };
@@ -2524,7 +2556,7 @@ var Reporter = (function (exports, Vue, L) {
 	    wmset.call(store$1, it, metadata);
 	    return metadata;
 	  };
-	  get = function (it) {
+	  get$1 = function (it) {
 	    return wmget.call(store$1, it) || {};
 	  };
 	  has$1 = function (it) {
@@ -2537,7 +2569,7 @@ var Reporter = (function (exports, Vue, L) {
 	    createNonEnumerableProperty(it, STATE, metadata);
 	    return metadata;
 	  };
-	  get = function (it) {
+	  get$1 = function (it) {
 	    return has(it, STATE) ? it[STATE] : {};
 	  };
 	  has$1 = function (it) {
@@ -2547,7 +2579,7 @@ var Reporter = (function (exports, Vue, L) {
 
 	var internalState = {
 	  set: set,
-	  get: get,
+	  get: get$1,
 	  has: has$1,
 	  enforce: enforce,
 	  getterFor: getterFor
@@ -6136,38 +6168,6 @@ var Reporter = (function (exports, Vue, L) {
 	  }
 	}
 
-	function get$1(_x) {
-	  return _get.apply(this, arguments);
-	}
-
-	function _get() {
-	  _get = _asyncToGenerator(
-	  /*#__PURE__*/
-	  regeneratorRuntime.mark(function _callee(url) {
-	    var _ref, data;
-
-	    return regeneratorRuntime.wrap(function _callee$(_context) {
-	      while (1) {
-	        switch (_context.prev = _context.next) {
-	          case 0:
-	            _context.next = 2;
-	            return axios$1.get(url);
-
-	          case 2:
-	            _ref = _context.sent;
-	            data = _ref.data;
-	            return _context.abrupt("return", data);
-
-	          case 5:
-	          case "end":
-	            return _context.stop();
-	        }
-	      }
-	    }, _callee);
-	  }));
-	  return _get.apply(this, arguments);
-	}
-
 	function getDataset(_x) {
 	  return _getDataset.apply(this, arguments);
 	}
@@ -6183,7 +6183,7 @@ var Reporter = (function (exports, Vue, L) {
 	          case 0:
 	            id = _ref.id, source = _ref.source;
 	            _context.next = 3;
-	            return get$1(source);
+	            return get(source);
 
 	          case 3:
 	            data = _context.sent;
@@ -6247,7 +6247,7 @@ var Reporter = (function (exports, Vue, L) {
 	  var _ref2 = _asyncToGenerator(
 	  /*#__PURE__*/
 	  regeneratorRuntime.mark(function _callee(_ref) {
-	    var element, reportSpec, _ref3, _ref3$data, title, sections, sources, mapViews, datasets;
+	    var element, reportSpec, _ref3, title, sections, sources, mapViews, datasets;
 
 	    return regeneratorRuntime.wrap(function _callee$(_context) {
 	      while (1) {
@@ -6255,19 +6255,18 @@ var Reporter = (function (exports, Vue, L) {
 	          case 0:
 	            element = _ref.element, reportSpec = _ref.reportSpec;
 	            _context.next = 3;
-	            return axios$1.get(reportSpec);
+	            return get(reportSpec);
 
 	          case 3:
 	            _ref3 = _context.sent;
-	            _ref3$data = _ref3.data;
-	            title = _ref3$data.title;
-	            sections = _ref3$data.sections;
-	            sources = _ref3$data.sources;
-	            mapViews = _ref3$data.mapViews;
-	            _context.next = 11;
+	            title = _ref3.title;
+	            sections = _ref3.sections;
+	            sources = _ref3.sources;
+	            mapViews = _ref3.mapViews;
+	            _context.next = 10;
 	            return getDatasets(sources);
 
-	          case 11:
+	          case 10:
 	            datasets = _context.sent;
 	            new Vue({
 	              el: element,
@@ -6285,7 +6284,7 @@ var Reporter = (function (exports, Vue, L) {
 	              }
 	            });
 
-	          case 13:
+	          case 12:
 	          case "end":
 	            return _context.stop();
 	        }
