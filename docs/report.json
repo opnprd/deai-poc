@@ -31,7 +31,7 @@
             "_NB_ This is purely an example report. Please do not draw any conclusions from the content",
             "of this web page.",            
             "",
-            "The report is [defined in an JSON file](report.json). This comprises a combination of",
+            "The report is [defined in a JSON file](report.json). This comprises a combination of",
             "structure, content and data.",
             "",
             "Structure is provided by an array of `sections`, defining the flow of the report.",
@@ -64,7 +64,9 @@
           "type": "narrative",
           "markdown": [
             "The site lies just to the west of the Hebden Bridge in the settlement of Mytholm. It is",
-            "directly adjacent to the A646."
+            "directly adjacent to the A646.",
+            "",
+            "The map below shows the site in a broad context, displaying the [data source named 'redline'](data/redline.geojson)."
           ]
         },
         {
@@ -78,7 +80,9 @@
             "It is the former location of",
             "[Mytholm Mill (a.k.a. Browns)](http://www.hebdenbridgehistory.org.uk/charlestown/mytholm.html#browns),",
             "a former cotton mill and (latterly) engineering works. The site fell from use during the mid-1980s,",
-            "and was demolished in 2005."
+            "and was demolished in 2005.",
+            "",
+            "The map below shows a close-up version of the site, reusing the same 'redline' data source."
           ]
         },
         {
