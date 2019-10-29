@@ -2489,6 +2489,7 @@ var Reporter = (function (exports, Vue, L) {
 	    overlays[name] = layer;
 	  });
 	  L.control.layers({}, overlays).addTo(map);
+	  L.control.scale().addTo(map);
 	  return map;
 	}
 

@@ -13,5 +13,6 @@ export default function initMap({ id, centre, zoom, layers } = {}) {
     overlays[name] = layer;
   });
   L.control.layers({}, overlays).addTo(map);
+  L.control.scale().addTo(map);
   return map;
 }
