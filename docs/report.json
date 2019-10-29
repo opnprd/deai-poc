@@ -13,11 +13,21 @@
   "sources": [
     {
       "id": "redline",
-      "source": "data/redline.geojson"
+      "source": "data/redline.geojson",
+      "options": {
+        "style": {
+          "color": "red"
+        }
+      }
     },
     {
       "id": "flood",
-      "source": "data/defra-flood/processed.geojson"
+      "source": "data/defra-flood/processed.geojson",
+      "options": {
+        "style": {
+          "color": "blue"
+        }
+      }
     }
   ],
   "sections": [

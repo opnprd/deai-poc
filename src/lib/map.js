@@ -8,7 +8,8 @@ export default function initMap({ id, centre, zoom, layers } = {}) {
   }).addTo(map);
 
   layers.forEach(l => {
-    L.geoJSON(l).addTo(map);
+    const { data, options } = l;
+    L.geoJSON(data, options).addTo(map);
   });
 
   return map;

@@ -2458,7 +2458,9 @@ var Reporter = (function (exports, Vue, L) {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	  }).addTo(map);
 	  layers.forEach(function (l) {
-	    L.geoJSON(l).addTo(map);
+	    var data = l.data,
+	        options = l.options;
+	    L.geoJSON(data, options).addTo(map);
 	  });
 	  return map;
 	}
@@ -4799,12 +4801,12 @@ var Reporter = (function (exports, Vue, L) {
 	  _getDataset = _asyncToGenerator(
 	  /*#__PURE__*/
 	  regeneratorRuntime.mark(function _callee(_ref) {
-	    var id, source, data;
+	    var id, source, options, data;
 	    return regeneratorRuntime.wrap(function _callee$(_context) {
 	      while (1) {
 	        switch (_context.prev = _context.next) {
 	          case 0:
-	            id = _ref.id, source = _ref.source;
+	            id = _ref.id, source = _ref.source, options = _ref.options;
 	            _context.next = 3;
 	            return get$1(source);
 
@@ -4812,7 +4814,8 @@ var Reporter = (function (exports, Vue, L) {
 	            data = _context.sent;
 	            return _context.abrupt("return", {
 	              id: id,
-	              data: data
+	              data: data,
+	              options: options
 	            });
 
 	          case 5:
@@ -4842,8 +4845,12 @@ var Reporter = (function (exports, Vue, L) {
 
 	            objectifer = function objectifer(acc, _ref2) {
 	              var id = _ref2.id,
-	                  data = _ref2.data;
-	              acc[id] = data;
+	                  data = _ref2.data,
+	                  options = _ref2.options;
+	              acc[id] = {
+	                data: data,
+	                options: options
+	              };
 	              return acc;
 	            };
 
