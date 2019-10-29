@@ -7,12 +7,11 @@ const path = require('path');
 
 const getConversion = require('./crs/convert');
 
+const [ , , input ] = process.argv;
+
 const pReadFile = promisify(readFile);
 
-const input = './docs/data/defra-flood/Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_3.json';
 const filename = path.resolve(input);
-
-console.log(filename);
 
 function inflate(data) {
   return JSON.parse(data);
