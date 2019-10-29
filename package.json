@@ -19,7 +19,9 @@
     "postbundle": "cp dist/*.js docs"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "leaflet": "^1.5.1",
+    "leaflet-easybutton": "^2.4.0",
     "marked": "^0.7.0",
     "proj4": "^2.5.0",
     "vue": "^2.6.10"

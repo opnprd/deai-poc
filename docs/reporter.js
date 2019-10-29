@@ -2490,6 +2490,9 @@ var Reporter = (function (exports, Vue, L) {
 	  });
 	  L.control.layers({}, overlays).addTo(map);
 	  L.control.scale().addTo(map);
+	  L.easyButton('fa-crosshairs fa-lg', function (btn, map) {
+	    map.flyTo(centre, zoom);
+	  }).addTo(map);
 	  return map;
 	}
 
