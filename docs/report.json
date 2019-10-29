@@ -13,6 +13,7 @@
   "sources": [
     {
       "id": "redline",
+      "name": "Red Line",
       "source": "data/redline.geojson",
       "options": {
         "style": {
@@ -22,6 +23,7 @@
     },
     {
       "id": "flood",
+      "name": "L3 Flood Risk",
       "source": "data/defra-flood/processed.geojson",
       "options": {
         "style": {

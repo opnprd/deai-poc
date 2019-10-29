@@ -2399,6 +2399,28 @@ var Reporter = (function (exports, Vue, L) {
 	  forEach: arrayForEach
 	});
 
+	var defineProperty$1 = objectDefineProperty.f;
+
+	var FunctionPrototype = Function.prototype;
+	var FunctionPrototypeToString = FunctionPrototype.toString;
+	var nameRE = /^\s*function ([^ (]*)/;
+	var NAME = 'name';
+
+	// Function instances `.name` property
+	// https://tc39.github.io/ecma262/#sec-function-instances-name
+	if (descriptors && !(NAME in FunctionPrototype)) {
+	  defineProperty$1(FunctionPrototype, NAME, {
+	    configurable: true,
+	    get: function () {
+	      try {
+	        return FunctionPrototypeToString.call(this).match(nameRE)[1];
+	      } catch (error) {
+	        return '';
+	      }
+	    }
+	  });
+	}
+
 	// iterable DOM collections
 	// flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
 	var domIterables = {
@@ -2454,14 +2476,19 @@ var Reporter = (function (exports, Vue, L) {
 	      layers = _ref.layers;
 
 	  var map = L.map(id).setView(centre, zoom);
-	  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	  var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-	  }).addTo(map);
-	  layers.forEach(function (l) {
-	    var data = l.data,
-	        options = l.options;
-	    L.geoJSON(data, options).addTo(map);
 	  });
+	  osm.addTo(map);
+	  var overlays = {};
+	  layers.forEach(function (l) {
+	    var name = l.name,
+	        data = l.data,
+	        options = l.options;
+	    var layer = L.geoJSON(data, options).addTo(map);
+	    overlays[name] = layer;
+	  });
+	  L.control.layers({}, overlays).addTo(map);
 	  return map;
 	}
 
@@ -4801,24 +4828,43 @@ var Reporter = (function (exports, Vue, L) {
 	  _getDataset = _asyncToGenerator(
 	  /*#__PURE__*/
 	  regeneratorRuntime.mark(function _callee(_ref) {
-	    var id, source, options, data;
+	    var id, name, source, options, data;
 	    return regeneratorRuntime.wrap(function _callee$(_context) {
 	      while (1) {
 	        switch (_context.prev = _context.next) {
 	          case 0:
-	            id = _ref.id, source = _ref.source, options = _ref.options;
-	            _context.next = 3;
-	            return get$1(source);
+	            id = _ref.id, name = _ref.name, source = _ref.source, options = _ref.options;
+
+	            if (id) {
+	              _context.next = 3;
+	              break;
+	            }
+
+	            throw new Error('Need to provide an ID for a dataset');
 
 	          case 3:
+	            if (source) {
+	              _context.next = 5;
+	              break;
+	            }
+
+	            throw new Error('Need to provide an Source for a dataset');
+
+	          case 5:
+	            if (!name) name = id;
+	            _context.next = 8;
+	            return get$1(source);
+
+	          case 8:
 	            data = _context.sent;
 	            return _context.abrupt("return", {
 	              id: id,
+	              name: name,
 	              data: data,
 	              options: options
 	            });
 
-	          case 5:
+	          case 10:
 	          case "end":
 	            return _context.stop();
 	        }
@@ -4845,9 +4891,11 @@ var Reporter = (function (exports, Vue, L) {
 
 	            objectifer = function objectifer(acc, _ref2) {
 	              var id = _ref2.id,
+	                  name = _ref2.name,
 	                  data = _ref2.data,
 	                  options = _ref2.options;
 	              acc[id] = {
+	                name: name,
 	                data: data,
 	                options: options
 	              };
