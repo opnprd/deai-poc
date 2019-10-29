@@ -3,7 +3,7 @@
   "mapViews": {
     "overview": {
       "centre": [ 53.742, -2.027 ],
-      "zoom": 13
+      "zoom": 15
     },
     "zoomed": {
       "centre": [ 53.742, -2.027 ],
@@ -27,7 +27,17 @@
       "source": "data/defra-flood/processed.geojson",
       "options": {
         "style": {
-          "color": "blue"
+          "color": "#88f"
+        }
+      }
+    },
+    {
+      "id": "rivers",
+      "name": "WFD River, Canal and Surface Water Transfer Waterbodies Cycle 2",
+      "source": "data/defra-river/processed.geojson",
+      "options": {
+        "style": {
+          "color": "#00d"
         }
       }
     }
@@ -109,12 +119,12 @@
       ]
     },
     {
-      "title": "Flood risk",
+      "title": "Water System",
       "content": [
         {
           "type": "map",
-          "view": "zoomed",
-          "layers": [ "redline", "flood" ]
+          "view": "overview",
+          "layers": [ "redline", "flood", "rivers" ]
         }
       ]
     }
