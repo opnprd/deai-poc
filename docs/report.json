@@ -2,11 +2,17 @@
   "title": "Digital EIA Data-Driven Environmental Statement",
   "mapViews": {
     "overview": {
-      "centre": [ 53.742, -2.027 ],
+      "centre": [
+        53.742,
+        -2.027
+      ],
       "zoom": 15
     },
     "zoomed": {
-      "centre": [ 53.742, -2.027 ],
+      "centre": [
+        53.742,
+        -2.027
+      ],
       "zoom": 17
     }
   },
@@ -55,7 +61,7 @@
             "of open data to create an initial draft of an ES which can then be developed further.",
             "",
             "_NB_ This is purely an example report. Please do not draw any conclusions from the content",
-            "of this web page.",            
+            "of this web page.",
             "",
             "The report is [defined in a JSON file](report.json). This comprises a combination of",
             "structure, content and data.",
@@ -98,7 +104,9 @@
         {
           "type": "map",
           "view": "overview",
-          "layers": [ "redline" ]
+          "layers": [
+            "redline"
+          ]
         },
         {
           "type": "narrative",
@@ -114,19 +122,61 @@
         {
           "type": "map",
           "view": "zoomed",
-          "layers": [ "redline" ]
+          "layers": [
+            "redline"
+          ]
         }
       ]
     },
     {
-      "title": "Water System",
+      "title": "Air Quality"
+    },
+    {
+      "title": "Cultural Heritage"
+    },
+    {
+      "title": "Landscape and Visual Effects"
+    },
+    {
+      "title": "Biodiversity"
+    },
+    {
+      "title": "Noise and Vibration"
+    },
+    {
+      "title": "Geology and Soils"
+    },
+    {
+      "title": "Road Drainage and the Water Environment",
       "content": [
+        {
+          "type": "narrative",
+          "markdown": [
+            "This section shows the water environment, presenting the watercourse and flood risk."
+          ]
+        },
         {
           "type": "map",
           "view": "overview",
-          "layers": [ "redline", "flood", "rivers" ]
+          "layers": [
+            "redline",
+            "flood",
+            "rivers"
+          ]
         }
       ]
+    },
+    {
+      "title": "Material assets and waste"
+    },
+    {
+      "title": "People and Communities"
+    },
+    {
+      "title": "Climate"
+    },
+    {
+      "title": "Cumulative effects"
     }
   ]
 }
