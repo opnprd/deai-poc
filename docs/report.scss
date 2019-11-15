@@ -1,0 +1,18 @@
+---
+---
+
+.map {
+  height: 30rem;
+  width: 100%
+}
+
+#report {
+  > section {
+    h1 {
+      font-size: 1.2em;
+    }
+  }
+  > section, > header {
+    padding-bottom: 2em;
+  }
+}

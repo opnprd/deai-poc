@@ -1,0 +1,33 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  > header {
+    text-align: center;
+    background: darkred;
+    padding: 1em;
+    color: white;
+    h1 {
+      font-size: 2em;
+      margin: 0;
+    }
+  }
+}
+
+%central {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50rem;
+}
+
+section[role="main"] {
+  @extend %central;
+  padding: 1em;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h1, h2, p {
+  padding-bottom: 0.6em;
+}

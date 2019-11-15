@@ -1,0 +1,12 @@
+<link href="https://odileeds.org/resources/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+{% for style in page.styles %}
+<link rel="stylesheet" href="{{ style.href }}" />
+{% endfor %}
+
+{% for script in page.scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
+

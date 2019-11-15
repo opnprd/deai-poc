@@ -1,37 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Data-driven Digital EIA Prototype</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://odileeds.org/resources/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
-  <link rel="stylesheet" href="vendor/leaflet/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
-  <link rel="stylesheet" href="vendor/leaflet/easy-button.css"/>
-  <link href="report.css" rel="stylesheet">
-  <!-- development version, includes helpful console warnings -->
-  <script src="vendor/vue/vue.js"></script>
-  <script src="vendor/fontawesome/all.min.js"></script>
-  <script src="vendor/leaflet/leaflet.js"></script>
-  <script src="vendor/leaflet/easy-button.js"></script>
-  <script src="reporter.js"></script>
-</head>
-<body>
-  <header>
-    <img src="https://odileeds.org/resources/images/odileeds-white2.svg">
-    <h1>Digital EIA Proof of Concept</h1>
-  </header>
-  <section role="main" class="central">
-    <article id="report">
-      <report-header v-bind:title="title"></report-header>
-      <report-section v-for="(section, index) in sections" v-bind="section" :key="index"></report-section>
-    </article>
-  </section>
-  <script defer>
-    Reporter.report({ element: '#report', reportSpec: './report.json' });
-  </script>
-</body>
-</html>
+---
+title: Data-driven Environmental Statement
+layout: default
+styles:
+  - href: vendor/leaflet/leaflet.css
+    integrity: sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==
+    crossorigin: ""
+  - href: vendor/leaflet/easy-button.css
+  - href: report.css
+scripts:
+  - vendor/vue/vue.js
+  - vendor/fontawesome/all.min.js
+  - vendor/leaflet/leaflet.js
+  - vendor/leaflet/easy-button.js
+  - reporter.js
+---
+<article id="report">
+  <report-header v-bind:title="title"></report-header>
+  <report-section v-for="(section, index) in sections" v-bind="section" :key="index"></report-section>
+</article>
+<script defer>
+  Reporter.report({ element: '#report', reportSpec: './report.json' });
+</script>
