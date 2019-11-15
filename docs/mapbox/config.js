@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 var config = {
-	style: 'mapbox://styles/gilesdring/ck2zzj29b022n1crvsz4q8z5f/draft',
+	style: 'mapbox://styles/gilesdring/ck2zzj29b022n1crvsz4q8z5f',
 	accessToken: 'pk.eyJ1IjoiZ2lsZXNkcmluZyIsImEiOiJjazJ4Y29nd3cwYWdkM2dwZDhlZ21zanFmIn0.V3S_lGS6Nub-uTcsm5xRrQ',
 	showMarkers: false,
 	theme: 'light',
