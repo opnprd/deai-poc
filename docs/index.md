@@ -23,3 +23,9 @@ Follow on ideas include:
 * User-friendly editor for report files.
 * Tool to collate datasets
 
+## MapBox 
+
+MapBox have recently published a Story-Blogging template, based on javascript. Data / map configuration and styling is stored
+in the MapBox servers.
+
+[Follow the link to see an example of the MapBox Storytelling template](/mapbox/).
