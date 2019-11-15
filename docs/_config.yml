@@ -1,2 +1,6 @@
 title: Digital EIA Tech PoC
 remote_theme: dringtech/jekyll-theme-barebones
+
+compress_html:
+  clippings: [div, p, ul, td, h1, h2]
+  blanklines: true
