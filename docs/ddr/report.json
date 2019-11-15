@@ -20,7 +20,7 @@
     {
       "id": "redline",
       "name": "Red Line",
-      "source": "data/redline.geojson",
+      "source": "/data/redline.geojson",
       "options": {
         "style": {
           "color": "red"
@@ -30,7 +30,7 @@
     {
       "id": "flood",
       "name": "L3 Flood Risk",
-      "source": "data/defra-flood/processed.geojson",
+      "source": "/data/defra-flood/processed.geojson",
       "options": {
         "style": {
           "color": "#88f"
@@ -40,7 +40,7 @@
     {
       "id": "rivers",
       "name": "WFD River, Canal and Surface Water Transfer Waterbodies Cycle 2",
-      "source": "data/defra-river/processed.geojson",
+      "source": "/data/defra-river/processed.geojson",
       "options": {
         "style": {
           "color": "#00d"

@@ -17,7 +17,7 @@
   },
   "scripts": {
     "bundle": "rollup --config rollup.config.js",
-    "postbundle": "cp dist/*.js docs"
+    "postbundle": "cp dist/*.js docs/ddr"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
