@@ -24,7 +24,7 @@
     "@opnprd/geojson-cleaner": "^0.2.0",
     "leaflet": "^1.5.1",
     "leaflet-easybutton": "^2.4.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "vue": "^2.6.10"
   }
 }
